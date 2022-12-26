@@ -140,9 +140,11 @@ content，padding，border，margin
 3. 可以为父元素添加overflow:hidden。
 
 # 06. 圆角变宽
+---
 1. border-radius
 
 # 07. 盒子阴影
+---
 1. box-shadow
 - h-shadow    必需。水平阴影的位置。
 - v-shadow    必需。垂直阴影的位置。
@@ -154,6 +156,7 @@ content，padding，border，margin
 注意：outset外阴影是默认值，是不可以写的，写完之后阴影会取消。
 
 # 08. 文字阴影
+---
 1. text-shadow
 - h-shadow    必需。水平阴影的位置。
 - v-shadow    必需。垂直阴影的位置。
@@ -163,6 +166,7 @@ content，padding，border，margin
 注意：文字阴影使用较少。
 
 # 09. 浮动布局
+---
 **传统网页布局的方式：**
 1. 普通流（标准流）
 - 从上到下，从左到右进行排列。
@@ -184,3 +188,61 @@ content，padding，border，margin
 注意：
 1. 任何元素都可以浮动。不管原先是什么模式的元素，添加浮动之后具有行内块元素相似的特征。
 2. 如果块级盒子没有设置宽度，默认和父级宽度一样，但添加浮动后，它的宽度根据内容来决定的。
+
+**浮动布局注意点：**
+1. 浮动和标准流的父盒子搭配。
+- 先用标准流的父元素排列上下位置，之后内部子元素采取浮动排列左右位置。
+
+2. 一个元素浮动了，理论上其余的兄弟元素也要浮动。
+- 一个盒子里面有多个子盒子，如果其中一个盒子浮动了，那么其它兄弟也应该浮动，以防止引起问题。
+- 浮动的盒子只会影响浮动的盒子后面的标准流，不会影响前面的标准流。
+
+**清除浮动：**
+1. 清除浮动的本质是，清除浮动元素造成的影响。
+2. 如果父盒子本身有高度，则不需要清除浮动。
+3. 清除浮动之后，父级就会根据浮动的盒子自动检测高度。父级有了高度，就不会影响下面的标准流了。
+
+**清除浮动语法：**
+```css
+  /* 方式一： 在盒子末尾添加一个空块级标签 */
+  选择器{
+    clear:both;
+  }
+
+  /* 方式二： 给父级设置一个overflow:hidden */
+  overflow:hidden;
+
+  /* 方式三： 使用伪元素方式 */
+  .clearfix:after{
+    content:'';
+    display:block;
+    clear:both;
+
+    height:0;
+    visibility:hidden;
+  }
+  /* IE6,7专有的 */
+  .clearfix{
+    *zoom:1;
+  }
+
+  /* 方式四： 双伪元素清除*/
+  .clearfix:before,.clearfix:after{
+    content:'';
+    display:table;
+  }
+  .clearfix:after{
+    clear:both;
+  }
+  .clearfix{
+    *zoom:1
+  }
+```
+- left
+- right
+- both
+
+**什么情况下需要清除浮动：**
+1. 父级没有高度。
+2. 子盒子浮动了。
+3. 影响下面布局了，我们就可以清除浮动。
