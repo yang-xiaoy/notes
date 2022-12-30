@@ -343,3 +343,164 @@ content，padding，border，margin
 - scroll   不溢出的时候也显示滚动条（溢出或者不溢出都显示滚动条）。
 - auto     高度超出显示滚动条，不超出就不显示滚动条。
 注意：一般情况下可以使用，如果有使用定位的地方，慎用溢出隐藏，如果定位元素超出盒子，就会切掉。
+
+# 12. 精灵图【CSS高级】
+---
+**精灵图的作用：Sprites**
+- 一个网页中往往会应用很多小的背景图像作为修饰，当网页中的图像过多时，服务器就会频繁地接收和发送请求图片，造成服务器请求压力过大，这将大大降低页面的加载速度。
+- 为了有效地减少服务器接收和发送请求的次数，提高页面的加载速度。
+
+- 核心原理：将网页中的一些小背景图像整合到一张大图中，这样服务器只需要一次请求就可以了。
+
+**精灵图的使用：**
+1. `精灵图技术主要是针对背景图片使用`，就是把多个小背景图片整合到一张大图中。
+2. Sprites 精灵图或者雪碧图。
+3. 移动背景图片的位置，此时可以使用background-position。
+4. 移动的距离就是这个目标图片的x和y坐标。注意网页中的坐标是有所不同的。
+5. `往上往左移动是负值。往下往右移动是正值。`
+6. 使用精灵图的时候需要精确测量，每个小背景图片的大小和位置。 
+
+# 13. 字体图标库【CSS高级】
+---
+**字体图标使用场景：iconfont**
+1. 主要用于显示网页中通用，常用的一些小图标。
+2. 精灵图是有优点的，但是缺点也是很明显。
+- 图片文件还是较大的。
+- 图片本身放大和缩小会失真。
+- 一旦图片制作完成，想要更换是非常复杂的。
+
+**字体图标库的优点：**
+1. 轻量级：一个图标字体要比一系列的图像要小。一旦字体加载了，图标就会马上渲染出来，较少服务器请求。
+2. 灵活性：本质其实是文字，可以随意的更改颜色，产生阴影，透明，旋转等效果。
+3. 兼容性：几乎支持所有的浏览器，可以放心使用。
+注意：字体图标不能替代精灵图技术，只是对工作中图标部分技术的提升和优化。
+
+**总结：**
+1. 如果遇到一些结构和样式比较简单的小图标，就使用字体图标。
+2. 如果遇到一些结构和样式复杂一点的小图片，就是用精灵图。
+
+**常用的字体图标库：**
+1. icomoon字库 http://icomoon.io
+- 成立于2011年，推出了第一个自定义图标字体生成器，它允许用户选择所需要的图标，使他们成一字型（也是免费的）。
+- 该字库内容种类繁多，非常全面，唯一的遗憾是国外服务器，打开网速较慢。
+
+2. 阿里iconfont字库 http://www.iconfont.cn
+- 这个是阿里巴巴的一个iconfont字体图标库，包含淘宝图标和阿里巴巴图标库，可以使用AI制作成图标上传生成，重点是：免费的。
+
+# 14. 三角形实现使用场景【CSS高级】
+---
+1. CSS三角形案例1：
+```css
+.box{
+      width: 0px;
+      height: 0px;
+      border-top: 100px solid pink;
+      border-bottom: 100px solid blue;
+      border-left: 100px solid red;
+      border-right: 100px solid yellow;      
+    }
+```
+2. CSS三角形案例2：
+```html
+<head>
+  <title>Document</title>
+  <style>
+    .content{
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    .box{
+      position: absolute;
+      right: 0;
+      top: 20px;
+      margin-right: -20px;
+      width: 0px;
+      height: 0px;
+      /* border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid transparent; */
+      border-left: 10px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="box"></div>
+  </div>
+</body>
+```
+# 15. CSS用户界面样式【CSS高级】
+--- 
+**鼠标样式：**
+1. cursor
+- default
+- pointer
+- move
+- text
+- not-allowed
+---
+**表单轮廓线：**
+1. outline:none 取消表单轮廓线
+---
+
+**防止拖拽文本域：**
+
+> textarea文本域防止拖拽。
+
+1. resize:none
+
+```css
+  textarea{
+    resize:none;
+  }
+```
+---     
+
+**vertical-align属性：**
+1. vertical-align使用场景：经常用于设置图片或者表单（行内块元素）和文字垂直对齐。
+2. 用于设置一个元素的垂直对齐方式，但是它只针对行内元素或者行内块元素。
+
+3. vertical-align
+- top 顶线（top line），把元素的顶端与行中最高元素的顶端对齐。
+- middle 中线（middle line），把此元素放置在父元素的中部。
+- baseline  默认（base line）。基线，元素放置在父元素的基线上。
+- bottom 底线（bottom line），把元素的顶端与行中最低的元素的顶端对齐。
+
+`解决图片底部默认空白缝隙问题：`
+> 问题描述：就是div里面包含一张图片，给div加上边框，会发现图片底部有一个缝隙，产生这个缝隙的主要原因是因为行内块元素和文字之间是基线对齐的 baseline。
+
+- 解决方式1：给图片添加 vertical-align:middle，top，bottom三个属性中的一个就可以解决这个问题。
+
+- 解决方式2：将图片转换成块级元素。display:block。只有行内块会产生空隙，而块元素不会产生空隙。vertical-align也是只用于行内块。
+---
+
+**单行文字溢出：**
+> 单行文本溢出显示省略号，必须满足三个条件。
+```css
+  /* 1. 先强制一行内显示文本(默认normal自动换行) */
+  white-space:nowrap;
+  /* 2. 超出部分隐藏 */
+  overflow:hidden;
+  /* 文字用省略号代替超出部分 */
+  text-overflow:ellipsis;
+```
+---
+
+**多行文字溢出：**
+> 多行文本溢出显示省略号，有较大的兼容性问题，适合于webkit浏览器或者移动端（移动端大部分是webkit内核）。
+```css
+  overflow:hidden;
+  text-overflow:ellipsis;
+  /* 弹性伸缩盒子模型显示 */
+  display:-webkit-box;
+  /* 限制在一个块元素显示的文本的行数 */
+  -webkit-line-clamp:2;
+  /* 设置或检索伸缩盒对象的子元素的排列方式 */
+  -webkit-box-orient:vertical;
+
+```
+注意：多行文本溢出隐藏这里是一定要给盒子设置宽高度的，高度和需要显示的文本行数是一行的（文本行数是刚好放在盒子里面的）否则就会出现第二行虽然显示了省略号，但是第三行文本依然显示着的。
