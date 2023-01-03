@@ -526,6 +526,8 @@ content，padding，border，margin
 
 # 19. CSS3过渡【重点】
 ---
+> `哪个元素需要使用过渡，就给哪个元素加过渡。`
+
 1. 过渡（transition）是CSS3中具有颠覆性的特征之一，我们可以在不使用Flash动画或JavaScript的情况下，当元素从一种样式变换为另一种样式时为元素添加效果。
 2. 过渡动画：是从一个状态渐渐的过渡到另一个状态。
 3. 可以让页面更好看，更动感十足，虽然低版本浏览器不支持（IE9以下版本），但是不会影响页面布局。
@@ -533,8 +535,27 @@ content，padding，border，margin
 注意：使用经常和:hover一起搭配使用。
 
 **过渡语法：**
-1. 语法：transition:要过渡的属性 花费时间 运动曲线 何时开始；
-- 属性：想要变化的CSS属性，宽度高度，背景颜色，内外边距都可以。如果想要所有的属性都变化过渡，写一个 all 就可以了。
-- 花费时间：单位是秒（必须写单位）比如：0.5s。
-- 运动曲线：默认是 ease（可以省略）。
-- 何时开始：单位是秒（必须写单位）可以设置延迟触发时间，默认是0s（可以省略）。
+- 语法：transition:要过渡的属性 花费时间 运动曲线 何时开始；
+1. 属性：想要变化的CSS属性，宽度高度，背景颜色，内外边距都可以。如果想要所有的属性都变化过渡，写一个 all 就可以了。
+2. 花费时间：单位是秒（必须写单位）比如：0.5s。
+3. 运动曲线：默认是 ease 减速（可以省略）。
+- linear 匀速
+- ease-in 加速
+- ease-out 减速（和ease相似）
+- ease-in-out 先加速后减速
+- cubic-bezier 贝塞尔曲线  （生成贝塞尔曲线：http://cubic-bezier.com）
+
+4. 何时开始：单位是秒（必须写单位）可以设置延迟触发时间，默认是0s（可以省略）。
+
+```css
+/* 
+ 1. 多个属性的过渡中间使用逗号进行隔开 
+ transition：1s width ，2s height，3s background;  
+ 
+ 2. 1s 过渡width，2s 过渡 height，3s 过渡 background
+ transition：1s width ，2s  1s height，3s  1s background;
+ 1s 过渡 width。
+ 2s 延迟，再用 1s 过渡 height。
+ 3s 延迟，再用 1s 过渡 background。
+*/
+```
