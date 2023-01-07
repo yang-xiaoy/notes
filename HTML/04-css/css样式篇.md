@@ -559,3 +559,148 @@ content，padding，border，margin
  3s 延迟，再用 1s 过渡 background。
 */
 ```
+# 20. 2D转换【CSS3高级】
+---
+1. 转换（transform）是CSS3中颠覆性的特征之一，可以实现元素的位移，旋转，缩放等效果。
+- 移动：translate
+- 旋转：rotate
+- 缩放：scale
+
+**移动（translate）：**
+> 一般情况下移动盒子的位置有三种方式：定位，盒子的外边距，2D转换。
+
+1. 语法：
+- transform:translate(x,y)x和y分别指的是x轴上移动的位置和y轴上移动的位置（需要带单位像素）。
+- transform:translateX(n)
+- transform:translateY(n)
+
+2. 移动的特点（重点）：
+- 定义2D转换中的移动，沿着x轴和y轴移动元素。
+- translate最大的优点：不会影响到其它元素的位置。
+- translate中的百分比单位是相对于自身元素的translate:(50%,50%)。
+- 对行内标签没有效果。
+
+**旋转（rotate）：**
+> 2D旋转指的是让元素在2维平面上顺时针或逆时针旋转。
+1. 语法：transform:rotate(度数) 
+
+2. 旋转的特点（重点）：
+- rotate里面根度数，单位是deg，比如：rotate(45deg)。
+- 角度为正时，顺时针，角度为负，逆时针。
+- 默认旋转的中心电视元素的中心点。
+
+3. transform-origin设置元素转换中心点
+- 语法：transform-origin：x y；
+
+- 注意后面的参数x和y用空格隔开。
+- xy默认转换的中心点是元素的中心点（50% 50%）是等于（center center）。
+- 还可以给xy设置像素或者方位名词（top bottom left right center）。
+
+**缩放（scale）：**
+> 缩放顾名思义，可以放大和缩小。只要给元素添加上了这个属性就能控制它放大还是缩小。
+
+1. 语法：transform:scale(x,y)
+- 注意其中的x和y用逗号分隔开（一定要注意：scale里面参数是不带单位的）。
+- transform:scale(1,1)：宽和高都放大一倍，相当于没有放大。
+- transform:scale(2,2)：宽和高都放大二倍。
+- transform:scale(2)：只写一个参数，第二个参数则和第一个参数一样，相当于scale(2,2)（一个参数就是等比例缩放）。
+- transform:scale(0.5,,0.5)：缩小。
+- scale缩放最大的优势是：可以设置转换中心点缩放，默认是以中心点缩放的，而不影响其它盒子。
+
+- `注意：之前可以使用改变宽高的方式来改变盒子的大小，但是改变宽高是向下延申的，会影响到其它的盒子。而使用scale是以中心点为准向四周延申的，不会影响其它的盒子。`
+
+**2D转换综合写法：**
+1. 同时使用多个转换，其格式为：transform：translate() rotate() scale()等。
+2. 其顺序会影响转换效果（先旋转会改变坐标轴方向）。
+3. 当同时有位移和其它属性的时候，记得要将位移移到最前面去。
+
+**2D转换总结：**
+1. 转换transform简单的理解就是变形有2D和3D之分。
+2. 在2D中学习了三个分别是：位移，旋转和缩放。
+3. 2D移动translate(x,y)最大的优势是不影响其它盒子，里面参数用%（百分比），是相对元素自身的宽高来计算的。
+4. 可以分开写比如：translateX(x)和translateY(y)。
+5. 2D旋转rotate(度数)可以实现旋转元素，度数是单位deg。
+6. 2D缩放scale(x,y)里面的参数不跟单位，可以是小数，最大的优势是不影响其它盒子。
+7. 设置转换中心点transform-origin:x,y；参数可以是百分比、像素或方位名词。
+8. 当同时有位移和其它属性的时候，记得要将位移移到最前面去。
+
+# 21. CSS3动画【CSS3高级】
+---
+>
+
+
+**动画简写属性：**
+1. 语法：animation:动画名称 持续时间 运动曲线 何时开始 播放次数 是否反方向 动画起始或者结束状态；
+```css
+  animation: first 5s linear 2s infinite alternate;
+```
+
+- 简写属性里面不包含animation-play-state，使用这个属性需要单独写。
+- 暂停动画：animation-play-state:paused(暂停动画的播放)，running正常播放动画。
+- 想要动画走回来，而不是直接跳回来：animation-direction:alternate。
+- 盒子动画结束后，停在结束位置：animation-fill-mode:forwards。
+
+# 22. 3D转换【CSS3高级】
+---
+1. 生活环境是3D的，照片就是3D物体在2D平面呈现的例子。
+2. 3D主要知识点：3D位移（translate3d(x,y,z)），3D旋转（rotate3d(x,y,z)），透视（perspective），3D呈现（transform-style）。
+
+**3D特点：**
+1. 近大远小。
+2. 物体后面遮挡不可见。
+
+**三维坐标系：**
+> 三维坐标系其实就是指立体空间，立体空间是由三个轴共同组成的。
+1. X轴：水平向右 注意：X右边是正值，左边是负值。
+2. Y轴：垂直向下 注意：Y下面是正值，上面是负值。
+3. Z轴：垂直屏幕 注意：往外面是正值，往里面是负值。
+
+**3D位移translate3d(x,y,z)：**
+> 3D移动在2D移动的基础上多加了一个可以移动的方向，就是z轴方向。
+
+1. 3D位移语法：
+- transform:translateX(100px) 仅仅是在X轴上移动。
+- transform:translateY(100px) 仅仅是在Y轴上移动。
+- transform:translateZ(100px) 仅仅是在Z轴上移动（注意：translateZ一般用px单位）。
+- transform:translate3d(x,y,z) 其中X,Y,Z分别指要移动的轴的方向距离（xyz三个不能空，如果不需要的参数就写成0）。
+
+**透视perspective：**
+
+1. 在2D平面产生近大远小视觉立体，但是只是效果的二维的。
+- 如果想要在网页上产生3D效果需要透视（理解成3D物体投影在2D平面内）。
+- 模拟人类的视觉位置，可认为安排一只眼睛去看。
+- 透视我们也称为视距：视距就是人的眼睛到屏幕的距离。
+- 距离视觉点越近的在电脑平面城像越大，越远成像越小。
+- 透视的单位是像素。
+
+2. 透视注意事项：
+- `透视写在被观察元素的父盒子上面（透视需要写在父盒子上面，加给父级元素和爷爷辈的元素都是可以的。）`。
+- 视距：视距就是一个距离人的眼睛到屏幕的距离。
+- Z轴：物体距离屏幕的距离，Z轴越大（正值）我们看到的物体就越大，这里指的是translateZ。
+
+
+**3D旋转rotate3d：**
+1. 3D旋转指可以让元素在三维平面内沿着x轴，y轴，z轴或者自定义轴进行旋转。
+
+2. 3D旋转语法：
+- transform:rotateX(45deg)  沿着X轴正方向旋转45度。
+- transform:rotateY(45deg)  沿着Y轴正方向旋转45度。
+- transform:rotateZ(45deg)  沿着Z轴正方向旋转45度。
+- transform:rotate3d(x,y,z,deg) 沿着自定义轴旋转deg为角度（了解即可）。 
+```css
+  /* 1. 沿着X轴旋转45deg */
+  transform:rotate3d(1,0,0,45deg);
+  /* 2. 沿着Y轴旋转45deg */
+  transform:rotate3d(0,1,0,45deg);
+  /* 3. 矢量沿着对角线进行旋转的 */
+  transform:rotate3d(1,1,0,45deg);
+```
+
+**3D呈现transform-style：**
+1. 控制子元素是否开启三维立体环境。
+2. transform-style:flat子元素不开启3d立体空间默认的。
+3. transform-style:preserve-3d子元素开启立体空间。
+4. 代码写给父级，但是影响的是子盒子（transform-style:preserve-3d这个属性是写给父级元素的）。
+> 加给父级元素和爷爷辈的元素都是可以的。
+5. 这个属性和重要，后面必须用的。
+
