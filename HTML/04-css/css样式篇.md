@@ -704,3 +704,8 @@ content，padding，border，margin
 > 加给父级元素和爷爷辈的元素都是可以的。
 5. 这个属性和重要，后面必须用的。
 
+# 23. CSS属性书写顺序【重点】
+1. 布局定位属性：display，position，float，clear，visibility，overflow（display写到第一个，毕竟关系到模式）。
+2. 自身属性：width，height，margin，padding，border，background。
+3. 文本属性：color，font，text-decoration，text-align，vertical-align，white-space，break-word。
+4. 其它属性（CSS3）：content，cursor，border-radius，bos-shadow，text-shadow，background:linear-gradient。
